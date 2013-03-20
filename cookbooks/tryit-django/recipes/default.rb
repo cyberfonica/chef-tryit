@@ -5,6 +5,8 @@
 # Cyberfonica Team
 #
 
+include_recipe 'apt'
+
 application "tryit-django" do
 
   path "/srv/tryit-django"

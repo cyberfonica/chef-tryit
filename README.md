@@ -19,10 +19,15 @@ Executed commands
     $ vim recipes/default.rb
       [[ cooking ]]
     $ knife cookbook upload -a
+
+    # Vagrant example
     $ vagrant up
     $ knife bootstrap localhost --ssh-user vagrant --ssh-password vagrant \
               --ssh-port 2222 --sudo --run-list "recipe[tryit-django]"
-    $ google-chrome http://localhost:8080
+
+    # EC2 Example
+    $ knife ec2 server create -r 'recipe[tryit-django]' -I ami-3d4ff254 \
+              -x ubuntu -i $HOME/.ssh/aws-carefoundry.pem -g sg-60836f0b
 
 
 Repository Directories
