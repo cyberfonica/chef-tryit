@@ -26,13 +26,13 @@ application "tryit-django" do
 
   gunicorn do
     app_module :django
-    host "127.0.0.1"
     port 8080
   end
 
   nginx_load_balancer do
       application_server_role "tryit-ec2"
       application_port 8080
+      template "nginx.conf.erb"
   end
 
 end
