@@ -6,11 +6,10 @@
 #
 
 include_recipe 'apt'
-include_recipe 'aws'
 
 application "tryit-django" do
 
-  path "/srv/tryit-django"
+  path ""
   owner "root"
   group "root"
   repository "https://github.com/chernando/tryit_django"
@@ -44,6 +43,7 @@ link "/srv/tryit-django/current/tryit/local_settings.py" do
 end
 
 aws_elastic_lb "eip_load_balancer_production" do
+    only_if { node['roles'].include?("tryit-ec2") }
     aws_access_key "KEY"
     aws_secret_access_key "SECRET"
     name "TryIT"
