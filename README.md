@@ -18,15 +18,22 @@ Executed commands
     $ cd cookbooks/tryit-django/
     $ vim recipes/default.rb
       [[ cooking ]]
+
     $ knife cookbook upload -a
+    $ knife role from file roles/tryit-worker.rb
+    $ knife role from file roles/tryit-vagrant.rb
+    $ knife role from file roles/tryit-ec2.rb
+    $ knife data bag create aws
+    $ vi databags/aws/main.json
+    $ knife data bag from file aws data_bags/aws/main.json
 
     # Vagrant example
     $ vagrant up
     $ knife bootstrap localhost --ssh-user vagrant --ssh-password vagrant \
-              --ssh-port 2222 --sudo --run-list "recipe[tryit-django]"
+              --ssh-port 2222 --sudo --run-list "role[tryit-vagrant]"
 
     # EC2 Example
-    $ knife ec2 server create -r 'recipe[tryit-django]' -I ami-3d4ff254 \
+    $ knife ec2 server create -r 'role[tryit-worker]' -I ami-3d4ff254 \
               -x ubuntu -i $HOME/.ssh/aws-carefoundry.pem -g sg-60836f0b
 
 
