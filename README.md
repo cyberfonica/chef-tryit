@@ -33,8 +33,8 @@ Executed commands
               --ssh-port 2222 --sudo --run-list "role[tryit-vagrant]"
 
     # EC2 Example
-    $ knife ec2 server create -r 'role[tryit-worker]' -I ami-3d4ff254 \
-              -x ubuntu -i $HOME/.ssh/aws-carefoundry.pem -g sg-60836f0b
+    $ knife ec2 server create -r 'role[tryit-ec2]' -I ami-3d4ff254 \
+              -x ubuntu -i $HOME/.ssh/KEY.pem -g SECURITY_GROUP
 
 
 Repository Directories

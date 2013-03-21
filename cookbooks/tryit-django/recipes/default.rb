@@ -9,7 +9,7 @@ include_recipe 'apt'
 
 application "tryit-django" do
 
-  path ""
+  path "/srv/tryit-django"
   owner "root"
   group "root"
   repository "https://github.com/chernando/tryit_django"
@@ -31,7 +31,7 @@ application "tryit-django" do
   end
 
   nginx_load_balancer do
-      application_server_role "tryit-worker"
+      application_server_role "tryit-ec2"
       application_port 8080
   end
 
@@ -40,12 +40,4 @@ end
 link "/srv/tryit-django/current/tryit/local_settings.py" do
     link_type "symbolic"
     to "/srv/tryit-django/shared/local_settings.py"
-end
-
-aws_elastic_lb "eip_load_balancer_production" do
-    only_if { node['roles'].include?("tryit-ec2") }
-    aws_access_key "KEY"
-    aws_secret_access_key "SECRET"
-    name "TryIT"
-    action :register
 end
